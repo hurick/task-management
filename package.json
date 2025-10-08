@@ -1,0 +1,31 @@
+{
+  "name": "task-management",
+  "version": "1.0.0",
+  "description": "API project for a To-Do List system using Node.js. Implements the essential features of a task manager for learning and portfolio purposes.",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "node --watch src/server.ts",
+    "clear": "rm -rf node_modules && npm install",
+    "clear:r": "rm -rf node_modules && npm install && npm run dev",
+    "g:d": "git diff > .github/diff.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hurick/task-management.git"
+  },
+  "keywords": [],
+  "author": "Hurick Krügner",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": "22.x",
+    "npm": "11.x"
+  },
+  "bugs": {
+    "url": "https://github.com/hurick/task-management/issues"
+  },
+  "homepage": "https://github.com/hurick/task-management#readme",
+  "dependencies": {
+    "@types/node": "24.7.0"
+  }
+}
