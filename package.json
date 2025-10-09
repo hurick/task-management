@@ -5,6 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "dev": "node --watch src/server.ts",
+    "d:csv": "node src/utils/import-csv.ts",
     "clear": "rm -rf node_modules && npm install",
     "clear:r": "rm -rf node_modules && npm install && npm run dev"
   },

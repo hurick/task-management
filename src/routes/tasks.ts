@@ -1,3 +1,4 @@
+import { DatabaseStructure } from '../@types/database.types.ts';
 import type { Route } from '../@types/route.types.ts';
 
 import { Database } from '../database/Database.ts';
@@ -5,7 +6,7 @@ import { Database } from '../database/Database.ts';
 import { buildRoutePath } from '../utils/build-route-path.ts';
 
 const database = new Database();
-const TABLE_NAME = 'tasks';
+const TABLE_NAME: keyof DatabaseStructure = 'tasks';
 
 export const taskRoutes: Route[] = [
   {
@@ -32,6 +33,16 @@ export const taskRoutes: Route[] = [
       const task = database.create(TABLE_NAME, { title, description });
 
       return res.writeHead(201).end(JSON.stringify(task));
+    }
+  },
+
+  {
+    method: 'GET',
+    path: buildRoutePath('/tasks'),
+    handler: (req, res) => {
+      const tasks = database.select(TABLE_NAME, req.query);
+      
+      return res.writeHead(200).end(JSON.stringify(tasks));
     }
   }
 ];

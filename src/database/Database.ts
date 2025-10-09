@@ -4,6 +4,8 @@ import { randomUUID } from "node:crypto";
 import type { DatabaseStructure, CreateTaskResponse } from '../@types/database.types.ts';
 import type { Tasks } from '../@types/tasks.types.ts';
 
+import { parseQueryParams } from '../utils/parse-query-params.ts';
+
 const databasePath = new URL('../db.json', import.meta.url);
 
 export class Database {
@@ -45,4 +47,19 @@ export class Database {
       message: 'Task created successfully!'
     };
   };
+
+  select(table: keyof DatabaseStructure, query?: string): Tasks[] {
+    let tableData = this.#database[table] ?? [];
+
+    if (query) {
+      const { search } = parseQueryParams(query);
+      
+      tableData = tableData.filter(({ title, description }) => (
+        title.toLowerCase().includes(search.toLowerCase()) ||
+        description.toLowerCase().includes(search.toLowerCase())
+      ));
+    }
+
+    return tableData;
+  }
 };
