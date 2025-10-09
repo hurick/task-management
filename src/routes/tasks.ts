@@ -32,7 +32,9 @@ export const taskRoutes: Route[] = [
 
       const task = database.create(TABLE_NAME, { title, description });
 
-      return res.writeHead(201).end(JSON.stringify(task));
+      return res
+        .writeHead(201)
+        .end(JSON.stringify(task));
     }
   },
 
@@ -42,7 +44,9 @@ export const taskRoutes: Route[] = [
     handler: (req, res) => {
       const tasks = database.select(TABLE_NAME, req.query);
       
-      return res.writeHead(200).end(JSON.stringify(tasks));
+      return res
+        .writeHead(200)
+        .end(JSON.stringify(tasks));
     }
   },
 
@@ -58,7 +62,7 @@ export const taskRoutes: Route[] = [
 
       if (!req.body || (!req.body.title && !req.body.description)) {
         return res.writeHead(400).end(JSON.stringify({
-          message: 'At least one of Title or Description is required to update.'
+          message: 'Title or Description are required to update.'
         }));
       };
 
@@ -73,9 +77,15 @@ export const taskRoutes: Route[] = [
         }));
       };
 
-      const updateResponse = database.update(TABLE_NAME, id, { title, description });
+      const updateResponse = database.update(
+        TABLE_NAME,
+        id,
+        { title, description }
+      );
 
-      return res.writeHead(200).end(JSON.stringify(updateResponse));
+      return res
+        .writeHead(200)
+        .end(JSON.stringify(updateResponse));
     }
   },
 
@@ -93,7 +103,9 @@ export const taskRoutes: Route[] = [
 
       const deleteResponse = database.delete(TABLE_NAME, id);
 
-      return res.writeHead(deleteResponse.success ? 200 : 404).end(JSON.stringify(deleteResponse));
+      return res
+        .writeHead(deleteResponse.success ? 200 : 404)
+        .end(JSON.stringify(deleteResponse));
     }
   },
 
@@ -111,7 +123,9 @@ export const taskRoutes: Route[] = [
 
       const completeResponse = database.complete(TABLE_NAME, id);
 
-      return res.writeHead(completeResponse.data ? 200 : 404).end(JSON.stringify(completeResponse));
+      return res
+        .writeHead(completeResponse.data ? 200 : 404)
+        .end(JSON.stringify(completeResponse));
     }
   }
 ];

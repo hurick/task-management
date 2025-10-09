@@ -157,7 +157,9 @@ export class Database {
 
     return {
       data: updatedTask,
-      message: isCurrentlyCompleted ? 'Task marked as incomplete.' : 'Task marked as complete.'
+      message: isCurrentlyCompleted
+        ? 'Task marked as incomplete.'
+        : 'Task marked as complete.'
     };
   }
 };
