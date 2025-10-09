@@ -47,12 +47,12 @@ src/
   ├── database/            # Database management
   │   └── Database.ts
   ├── middlewares/         # Express-like middlewares
-  │   └── stream-to-json.ts
+  │   └── streamToJson.ts
   ├── routes/              # API route handlers
   │   └── tasks.ts
   ├── utils/               # Utility functions
-  │   ├── build-route-path.ts
-  │   └── parse-query-params.ts
+  │   ├── buildRoutePath.ts
+  │   └── parseQueryParams.ts
   ├── routes.ts            # Route registration
   └── server.ts            # Application entry point
 ```
@@ -61,9 +61,23 @@ src/
 
 ### Tasks
 
+- `GET /tasks` - List all tasks
+  - Query params: `?search=term` (optional) - Filter tasks by title or description
+  - Returns: Array of tasks
+
 - `POST /tasks` - Create a new task
   - Body: `{ "title": string, "description": string }`
-  - Returns: Created task with ID and timestamps
+  - Returns: `{ "data": Task, "message": string }`
+
+- `PUT /tasks/:id` - Update a task
+  - Body: `{ "title": string, "description": string }`
+  - Returns: `{ "data": Task | null, "message": string }`
+
+- `DELETE /tasks/:id` - Delete a task
+  - Returns: `{ "success": boolean, "message": string }`
+
+- `PATCH /tasks/:id/complete` - Toggle task completion status
+  - Returns: `{ "data": Task | null, "message": string }`
 
 ## License
 
