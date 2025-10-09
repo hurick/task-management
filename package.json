@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "node --watch src/server.ts",
     "clear": "rm -rf node_modules && npm install",
-    "clear:r": "rm -rf node_modules && npm install && npm run dev",
-    "g:d": "git diff > .github/diff.txt"
+    "clear:r": "rm -rf node_modules && npm install && npm run dev"
   },
   "repository": {
     "type": "git",
