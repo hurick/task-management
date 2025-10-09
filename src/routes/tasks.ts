@@ -77,5 +77,23 @@ export const taskRoutes: Route[] = [
 
       return res.writeHead(200).end(JSON.stringify(updateResponse));
     }
+  },
+
+  {
+    method: 'DELETE',
+    path: buildRoutePath('/tasks/:id'),
+    handler: (req, res) => {
+      if (!req.params?.id) {
+        return res.writeHead(400).end(JSON.stringify({
+          message: 'Task ID is required.'
+        }));
+      }
+
+      const { id } = req.params;
+
+      const deleteResponse = database.delete(TABLE_NAME, id);
+
+      return res.writeHead(deleteResponse.success ? 200 : 404).end(JSON.stringify(deleteResponse));
+    }
   }
 ];

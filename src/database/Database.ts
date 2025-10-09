@@ -5,7 +5,8 @@ import type { Tasks } from '../@types/tasks.types.ts';
 import type {
   DatabaseStructure,
   CreateTaskResponse,
-  UpdateTaskResponse
+  UpdateTaskResponse,
+  DeleteTaskResponse
 } from '../@types/database.types.ts';
 
 import { parseQueryParams } from '../utils/parse-query-params.ts';
@@ -100,6 +101,30 @@ export class Database {
     return {
       data: updatedTask,
       message: 'Task updated successfully!'
+    };
+  };
+
+  delete(table: keyof DatabaseStructure, id: string): DeleteTaskResponse {
+    const tableData = this.#database[table] ?? [];
+    const taskIndex = tableData.findIndex(task => task.id === id);
+
+    if (taskIndex === -1) {
+      return {
+        success: false,
+        message: 'Task not found.'
+      };
+    };
+
+    if (!Array.isArray(this.#database[table])) {
+      this.#database[table] = [];
+    };
+
+    this.#database[table].splice(taskIndex, 1);
+    this.#persist();
+
+    return {
+      success: true,
+      message: 'Task deleted successfully!'
     };
   };
 };

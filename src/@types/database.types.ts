@@ -13,3 +13,8 @@ export interface UpdateTaskResponse {
   data: Tasks | null;
   message: string;
 }
+
+export interface DeleteTaskResponse {
+  success: boolean;
+  message: string;
+}
