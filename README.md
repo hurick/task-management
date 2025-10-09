@@ -32,6 +32,7 @@ The server will start on port 3333.
 ## Available Scripts
 
 - `npm run dev` - Start the development server with auto-reload
+- `npm run csv` - Import tasks from CSV file (data.csv)
 - `npm run clear` - Remove node_modules and reinstall dependencies
 - `npm run clear:r` - Remove node_modules, reinstall dependencies, and start dev server
 
@@ -41,18 +42,20 @@ The server will start on port 3333.
 src/
   ├── @types/              # TypeScript type definitions
   │   ├── database.types.ts
-  │   ├── requests.types.ts
   │   ├── route.types.ts
+  │   ├── server.types.ts
   │   └── tasks.types.ts
   ├── database/            # Database management
   │   └── Database.ts
-  ├── middlewares/         # Express-like middlewares
-  │   └── streamToJson.ts
+  ├── middlewares/         # HTTP middlewares
+  │   └── stream-to-json.ts
   ├── routes/              # API route handlers
   │   └── tasks.ts
+  ├── scripts/             # Utility scripts
+  │   └── import-csv.ts
   ├── utils/               # Utility functions
-  │   ├── buildRoutePath.ts
-  │   └── parseQueryParams.ts
+  │   ├── build-route-path.ts
+  │   └── parse-query-params.ts
   ├── routes.ts            # Route registration
   └── server.ts            # Application entry point
 ```
