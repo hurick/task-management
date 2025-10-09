@@ -44,5 +44,38 @@ export const taskRoutes: Route[] = [
       
       return res.writeHead(200).end(JSON.stringify(tasks));
     }
+  },
+
+  {
+    method: 'PUT',
+    path: buildRoutePath('/tasks/:id'),
+    handler: (req, res) => {
+      if (!req.params?.id) {
+        return res.writeHead(400).end(JSON.stringify({
+          message: 'Task ID is required.'
+        }));
+      }
+
+      if (!req.body || (!req.body.title && !req.body.description)) {
+        return res.writeHead(400).end(JSON.stringify({
+          message: 'At least one of Title or Description is required to update.'
+        }));
+      }
+
+      const { id } = req.params;
+
+      const title = req.body.title?.trim();
+      const description = req.body.description?.trim();
+
+      if (title === '' || description === '') {
+        return res.writeHead(400).end(JSON.stringify({
+          message: 'Title and Description cannot be empty.'
+        }));
+      }
+
+      const updateResponse = database.update(TABLE_NAME, id, { title, description });
+
+      return res.writeHead(200).end(JSON.stringify(updateResponse));
+    }
   }
 ];

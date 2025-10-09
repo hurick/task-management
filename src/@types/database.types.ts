@@ -8,3 +8,8 @@ export interface CreateTaskResponse {
   data: Tasks;
   message: string;
 }
+
+export interface UpdateTaskResponse {
+  data: Tasks | null;
+  message: string;
+}
