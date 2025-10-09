@@ -1,4 +1,4 @@
-import { DatabaseStructure } from '../@types/database.types.ts';
+import type { DatabaseStructure } from '../@types/database.types.ts';
 import type { Route } from '../@types/route.types.ts';
 
 import { Database } from '../database/Database.ts';
@@ -16,18 +16,18 @@ export const taskRoutes: Route[] = [
       const body = req.body;
       
       if (!body || !body.title || !body.description) {
-        return res.writeHead(400).end({
+        return res.writeHead(400).end(JSON.stringify({
           message: 'Title and Description are required.'
-        });
+        }));
       };
 
       const title = body.title.trim();
       const description = body.description.trim();
 
       if (!title || !description) {
-        return res.writeHead(400).end({
+        return res.writeHead(400).end(JSON.stringify({
           message: 'Title and Description cannot be empty.'
-        });
+        }));
       }
 
       const task = database.create(TABLE_NAME, { title, description });

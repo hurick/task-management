@@ -1,14 +1,12 @@
 import { IncomingMessage } from 'node:http';
 
-interface RequestOptions {
+export interface RequestWithOptions extends IncomingMessage {
   body?: {
     title?: string;
     description?: string;
   };
-  query?: string;
   params?: {
     id?: string;
   };
+  query?: string;
 };
-
-export type RequestWithOptions = IncomingMessage & RequestOptions;

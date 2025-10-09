@@ -1,6 +1,6 @@
 import http from 'node:http';
 
-import type { RequestWithOptions } from './@types/requests.types.ts';
+import type { RequestWithOptions } from './@types/server.types.ts';
 
 import { streamToJSON } from './middlewares/stream-to-json.ts';
 

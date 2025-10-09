@@ -1,6 +1,6 @@
 import { ServerResponse } from 'node:http';
 
-import { RequestWithOptions } from './requests.types.ts';
+import { RequestWithOptions } from './server.types.ts';
 
 export interface Route {
   method: 'POST' | 'GET' | 'PUT' | 'DELETE';

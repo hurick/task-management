@@ -1,6 +1,6 @@
 import { ServerResponse } from 'node:http';
 
-import type { RequestWithOptions } from '../@types/requests.types.ts';
+import type { RequestWithOptions } from '../@types/server.types.ts';
 
 export const streamToJSON = async (req: RequestWithOptions, res: ServerResponse) => {
   const buffers: Buffer[] = [];
