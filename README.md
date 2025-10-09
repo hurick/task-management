@@ -38,7 +38,7 @@ npm run dev
 
 ```
 src/
-  ├── index.ts        # Application entry point
+  ├── server.ts        # Application entry point
   └── ...             # Additional source files
 ```
 

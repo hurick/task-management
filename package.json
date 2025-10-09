@@ -2,7 +2,7 @@
   "name": "task-management",
   "version": "1.0.0",
   "description": "API project for a To-Do List system using Node.js. Implements the essential features of a task manager for learning and portfolio purposes.",
-  "main": "src/index.ts",
+  "main": "src/server.ts",
   "scripts": {
     "dev": "node --watch src/server.ts",
     "clear": "rm -rf node_modules && npm install",
