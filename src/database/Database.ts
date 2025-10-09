@@ -53,7 +53,7 @@ export class Database {
 
     if (query) {
       const { search } = parseQueryParams(query);
-      
+
       tableData = tableData.filter(({ title, description }) => (
         title.toLowerCase().includes(search.toLowerCase()) ||
         description.toLowerCase().includes(search.toLowerCase())
