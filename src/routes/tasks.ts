@@ -28,7 +28,7 @@ export const taskRoutes: Route[] = [
         return res.writeHead(400).end(JSON.stringify({
           message: 'Title and Description cannot be empty.'
         }));
-      }
+      };
 
       const task = database.create(TABLE_NAME, { title, description });
 
@@ -54,13 +54,13 @@ export const taskRoutes: Route[] = [
         return res.writeHead(400).end(JSON.stringify({
           message: 'Task ID is required.'
         }));
-      }
+      };
 
       if (!req.body || (!req.body.title && !req.body.description)) {
         return res.writeHead(400).end(JSON.stringify({
           message: 'At least one of Title or Description is required to update.'
         }));
-      }
+      };
 
       const { id } = req.params;
 
@@ -71,7 +71,7 @@ export const taskRoutes: Route[] = [
         return res.writeHead(400).end(JSON.stringify({
           message: 'Title and Description cannot be empty.'
         }));
-      }
+      };
 
       const updateResponse = database.update(TABLE_NAME, id, { title, description });
 
@@ -87,13 +87,31 @@ export const taskRoutes: Route[] = [
         return res.writeHead(400).end(JSON.stringify({
           message: 'Task ID is required.'
         }));
-      }
+      };
 
       const { id } = req.params;
 
       const deleteResponse = database.delete(TABLE_NAME, id);
 
       return res.writeHead(deleteResponse.success ? 200 : 404).end(JSON.stringify(deleteResponse));
+    }
+  },
+
+  {
+    method: "PATCH",
+    path: buildRoutePath('/tasks/:id/complete'),
+    handler: (req, res) => {
+      if (!req.params?.id) {
+        return res.writeHead(400).end(JSON.stringify({
+          message: 'Task ID is required.'
+        }));
+      };
+
+      const { id } = req.params;
+
+      const completeResponse = database.complete(TABLE_NAME, id);
+
+      return res.writeHead(completeResponse.data ? 200 : 404).end(JSON.stringify(completeResponse));
     }
   }
 ];

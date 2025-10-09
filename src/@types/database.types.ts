@@ -18,3 +18,8 @@ export interface DeleteTaskResponse {
   success: boolean;
   message: string;
 }
+
+export interface CompleteTaskResponse {
+  data: Tasks | null;
+  message: string;
+}

@@ -6,7 +6,8 @@ import type {
   DatabaseStructure,
   CreateTaskResponse,
   UpdateTaskResponse,
-  DeleteTaskResponse
+  DeleteTaskResponse,
+  CompleteTaskResponse
 } from '../@types/database.types.ts';
 
 import { parseQueryParams } from '../utils/parse-query-params.ts';
@@ -127,4 +128,36 @@ export class Database {
       message: 'Task deleted successfully!'
     };
   };
+
+  complete(table: keyof DatabaseStructure, id: string): CompleteTaskResponse {
+    const tableData = this.#database[table] ?? [];
+    const taskIndex = tableData.findIndex(task => task.id === id);
+
+    if (taskIndex === -1) {
+      return {
+        data: null,
+        message: 'Task not found.'
+      };
+    };
+
+    const existingTask = tableData[taskIndex];
+    const isCurrentlyCompleted = !!existingTask.completed_at;
+    const updatedTask = {
+      ...existingTask,
+      completed_at: isCurrentlyCompleted ? null : new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+
+    if (!Array.isArray(this.#database[table])) {
+      this.#database[table] = [];
+    };
+    
+    this.#database[table][taskIndex] = updatedTask;
+    this.#persist();
+
+    return {
+      data: updatedTask,
+      message: isCurrentlyCompleted ? 'Task marked as incomplete.' : 'Task marked as complete.'
+    };
+  }
 };
